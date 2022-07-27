@@ -22,3 +22,9 @@ rate_by_autopsies_introduced <- hospital %>%
   mutate(autopsies_introduced= year >= 1823) %>%
   group_by(autopsies_introduced) %>%
   summarize( avg_rate= mean(death_rate) )
+
+#visualizing the death_rates
+summary(clinic$year)
+library(ggplot2)
+ggplot(hospital, aes(x=year, y=death_rate, color=hospital))+ geom_line()+ theme_minimal()+geom_vline(xintercept= 1823, linetype="dashed")
+ggplot(clinic, aes(x=year, y=death_rate, color=clinic))+geom_line()+theme_minimal()+geom_vline(xintercept = 1847, linetype="dashed")
